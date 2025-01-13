@@ -16,7 +16,7 @@ public class Controller {
     private String firebaseAuthUiUrl;
 
     @CrossOrigin(origins = "${firebase.auth.origin}")
-    @GetMapping("/public")
+    @GetMapping("/")
     public ResponseEntity<Void> redirectToAuthUi() {
         return ResponseEntity.status(HttpStatus.FOUND)
                 .header(HttpHeaders.LOCATION, firebaseAuthUiUrl)
