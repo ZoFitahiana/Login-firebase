@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firebase UI Login</title>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.css" />
+</head>
+<body>
+<div id="firebaseui-auth-container"></div>
+<script th:inline="javascript">
+    var firebaseConfig = {
+        apiKey: /*[[${apiKey}]]*/ "",
+        authDomain: /*[[${authDomain}]]*/ "",
+        projectId: /*[[${projectId}]]*/ "",
+        storageBucket: /*[[${storageBucket}]]*/ "",
+        messagingSenderId: /*[[${messagingSenderId}]]*/ "",
+        appId: /*[[${appId}]]*/ "",
+        measurementId: /*[[${measurementId}]]*/ ""
+    };
+    firebase.initializeApp(firebaseConfig);
+    var ui = new firebaseui.auth.AuthUI(firebase.auth());
+    var uiConfig = {
+        callbacks: {
+            signInSuccessWithAuthResult: function(authResult, redirectUrl) {
+                window.location.href = '/api/private';
+                return false;
+            },
+            uiShown: function() {
+                document.getElementById('loader').style.display = 'none';
+            }
+        },
+        signInFlow: 'popup',
+        signInSuccessUrl: '/',
+        signInOptions: [
+            firebase.auth.EmailAuthProvider.PROVIDER_ID,
+        ],
+        tosUrl: '<your-tos-url>',
+        privacyPolicyUrl: '<your-privacy-policy-url>',
+        credentialHelper: firebaseui.auth.CredentialHelper.NONE,
+        signInFlow: 'redirect',
+        signInOptions: [
+            {
+                provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
+                signInMethod: firebase.auth.EmailAuthProvider.EMAIL_PASSWORD_SIGN_IN_METHOD
+            }
+        ]
+    };
+    ui.start('#firebaseui-auth-container', uiConfig);
+</script>
+</body>
+</html>
