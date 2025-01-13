@@ -14,25 +14,25 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/api")
 public class FirebaseController {
 
-    @Value("${firebase.apiKey}")
+    @Value("${FIREBASE_API_KEY}")
     private String apiKey;
 
-    @Value("${firebase.authDomain}")
+    @Value("${FIREBASE_AUTH_DOMAIN}")
     private String authDomain;
 
-    @Value("${firebase.projectId}")
+    @Value("${FIREBASE_PROJECT_ID}")
     private String projectId;
 
-    @Value("${firebase.storageBucket}")
+    @Value("${FIREBASE_STORAGE_BUCKET}")
     private String storageBucket;
 
-    @Value("${firebase.messagingSenderId}")
+    @Value("${FIREBASE_MESSAGING_SENDER_ID}")
     private String messagingSenderId;
 
-    @Value("${firebase.appId}")
+    @Value("${FIREBASE_APP_ID}")
     private String appId;
 
-    @Value("${firebase.measurementId}")
+    @Value("${FIREBASE_MEASUREMENT_ID}")
     private String measurementId;
 
     @GetMapping("/")
